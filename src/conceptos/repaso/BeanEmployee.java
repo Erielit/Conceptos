@@ -1,4 +1,4 @@
-package conceptos;
+package conceptos.repaso;
 
 public class BeanEmployee extends BeanPerson {
 

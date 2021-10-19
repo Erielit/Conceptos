@@ -1,4 +1,4 @@
-package conceptos;
+package conceptos.repaso;
 
 public abstract class FiguraGeometrica {
     public abstract double area();

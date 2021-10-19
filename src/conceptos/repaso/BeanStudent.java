@@ -1,4 +1,4 @@
-package conceptos;
+package conceptos.repaso;
 
 public class BeanStudent extends BeanPerson {
     private String studentKey;

@@ -1,4 +1,4 @@
-package conceptos;
+package conceptos.repaso;
 
 public abstract class InstrumentoMusical {
     public abstract void tocarInstrumento();
