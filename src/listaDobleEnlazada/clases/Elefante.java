@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package listaEnlazada.clases;
+package listaDobleEnlazada.clases;
 
 /**
  *
- * @author netmo
+ * @author CC10
  */
 public class Elefante {
-    
+
     private String nombre;
     private int edad;
     private double estatura;
@@ -52,4 +52,5 @@ public class Elefante {
     public String toString() {
         return "" + nombre + "";
     }
+
 }

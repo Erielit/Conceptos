@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package examen;
+package listaDobleEnlazada.examen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,25 +21,14 @@ public class Test {
         List<Jugador> jugadores = new ArrayList<>();
         jugadores.add(new Jugador("Mike", 0, 0));
         jugadores.add(new Jugador("Angel", 0, 0));
-        int ganador, posicion;
-        double puntuacion;
         boolean bandera = true;
         String opcion = "";
-        String[][] gato = new String[3][3];
-        gato = inicializar(gato);
         while (bandera) {
             System.out.println("1. Registrar jugador");
             System.out.println("2. Jugar al Gato");
             System.out.println("3. Salir");
             System.out.println("Seleccionar opción...");
-            do {
-                opcion = sc.next();
-                if (!opcion.equals("1")
-                        && !opcion.equals("2") && !opcion.equals("3")) {
-                    System.out.println("Opción incorrecta");
-                }
-            } while (!opcion.equals("1")
-                    && !opcion.equals("2") && !opcion.equals("3"));
+            opcion = sc.next();
             System.out.println("===========================================");
             switch (opcion) {
                 case "1":
@@ -48,6 +37,7 @@ public class Test {
                     System.out.println("Jugador registrado correctamente");
                     break;
                 case "2":
+                    String[][] gato = {{" ", " ", " "}, {" ", " ", " "}, {" ", " ", " "}};
                     if (jugadores.size() < 2) {
                         System.out.println("El juego no puede comenzar");
                     } else {
@@ -78,18 +68,16 @@ public class Test {
                                 break;
                             }
                         } while (true);
-                        tablero(gato);
-                        boolean finalJuego = true, tiradaCorrecta = true;
+                        boolean finalJuego = true;
                         int posicionSeleccionada = -1, tiradas = 1;
                         String valor = "";
                         while (finalJuego) {
                             do {
-                                System.out.println("1 | 2 | 3");
-                                System.out.println("4 | 5 | 6");
-                                System.out.println("7 | 8 | 9");
+                                System.out.println("[1][2][3]");
+                                System.out.println("[4][5][6]");
+                                System.out.println("[7][8][9]");
                                 System.out.println("Seleccione una posición");
                                 posicionSeleccionada = sc.nextInt();
-//                                if (tiradaCorrecta(posicionSeleccionada)) {
                                 switch (posicionSeleccionada) {
                                     case 1:
                                         valor = gato[0][0];
@@ -184,127 +172,104 @@ public class Test {
                                     default:
                                         System.out.println("Opción no válida");
                                 }
-                                if (tiradas == 10) {
-                                    winVertical(gato);
-                                    winHorizontal(gato);
-                                    break;
+
+                                if (verificarGanador(gato, primero, segundo)) {
+                                    System.out.println("Juego terminado!");
+                                    finalJuego = false;
+                                } else {
+                                    if (tiradas == 10) {
+                                        System.out.println("Empate!");
+                                        primero.setPuntuacion(primero.getPuntuacion() + 5);
+                                        segundo.setPuntuacion(segundo.getPuntuacion() + 5);
+                                        finalJuego = false;
+                                    }
                                 }
-
-                            } while (true);
-
+                            } while (finalJuego);
                         }
                     }
                     break;
                 case "3":
+                    if (jugadores.isEmpty()) {
+                        System.out.println("No hay registros");
+                    } else {
+                        for (Jugador jugadore : jugadores) {
+                            System.out.println("Jugador " + jugadore.getNombre());
+                            System.out.println("\tG:" + jugadore.getGanados());
+                            System.out.println("\tO:" + jugadore.getPuntuacion());
+                        }
+                    }
                     bandera = false;
                     break;
                 default:
-                    System.out.println("Error!");
+                    System.out.println("Opción incorrecta!");
             }
         }
-    }
-
-    public static boolean tiradaCorrecta(int posicion) {
-        if (posicion != 1 && posicion != 2 && posicion != 3
-                && posicion != 4 && posicion != 5 && posicion != 6
-                && posicion != 7 && posicion != 8 && posicion != 9) {
-            return true;
-        }
-        return false;
     }
 
     public static void tablero(String[][] arr) {
+        System.out.println("===========================================");
         for (String[] strings : arr) {
             for (String string : strings) {
-                System.out.print("|" + string + "|");
+                System.out.print("[" + string + "]");
             }
             System.out.println("");
         }
+        System.out.println("===========================================");
     }
 
-    public static String[][] inicializar(String[][] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                arr[i][j] = " ";
-            }
-        }
-        return arr;
-    }
-
-    public static boolean isNumber(String param) {
-        int numero;
-        try {
-            numero = Integer.parseInt(param);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public static void verificarGanador(String gato[][], Jugador primero, Jugador segundo) {
-        if (segundo == null) {
+    public static boolean verificarGanador(String gato[][], Jugador primero, Jugador segundo) {
+        boolean ganador = false;
+        if (winHorizontal(gato).equals("primero") || winVertical(gato).equals("primero")) {
+            System.out.println("Jugador " + primero.getNombre() + " gana!");
+            primero.setGanados(primero.getGanados() + 1);
+            primero.setPuntuacion(primero.getPuntuacion() + 10);
+            ganador = true;
+        } else if (winHorizontal(gato).equals("segundo") || winVertical(gato).equals("segundo")) {
+            System.out.println("Jugador " + segundo.getNombre() + " gana!");
             segundo.setGanados(segundo.getGanados() + 1);
             segundo.setPuntuacion(segundo.getPuntuacion() + 10);
+            ganador = true;
         }
+        return ganador;
     }
 
-    public static void winHorizontal(String[][] gato) {
-        boolean superior = false, medio = false, bajo = false;
+    public static String winHorizontal(String[][] gato) {
+        String ganador = "";
         if (gato[0][0].equals("X") && gato[0][1].equals("X") && gato[0][2].equals("X")) {
-            System.out.println("Primer jugador gana");
-            superior = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[0][1].equals("O") && gato[0][2].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            superior = true;
+            ganador = "segundo";
         }
         if (gato[1][0].equals("X") && gato[1][1].equals("X") && gato[1][2].equals("X")) {
-            System.out.println("Primer jugador gana");
-            medio = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[0][1].equals("O") && gato[0][2].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            medio = true;
+            ganador = "segundo";
         }
         if (gato[2][0].equals("X") && gato[2][1].equals("X") && gato[2][2].equals("X")) {
-            System.out.println("Primer jugador gana");
-            bajo = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[0][1].equals("O") && gato[0][2].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            bajo = true;
+            ganador = "segundo";
         }
-        if (superior || medio || bajo) {
-            System.out.println("Juego terminado");
-        } else {
-            System.out.println("Empate!");
-        }
+        return ganador;
     }
 
-    public static void winVertical(String[][] gato) {
-        boolean superior = false, medio = false, bajo = false;
+    public static String winVertical(String[][] gato) {
+        String ganador = "";
         if (gato[0][0].equals("X") && gato[1][0].equals("X") && gato[2][0].equals("X")) {
-            System.out.println("Primer jugador gana");
-            superior = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[1][0].equals("O") && gato[2][0].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            superior = true;
+            ganador = "segundo";
         }
         if (gato[1][0].equals("X") && gato[1][1].equals("X") && gato[1][2].equals("X")) {
-            System.out.println("Primer jugador gana");
-            medio = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[1][0].equals("O") && gato[2][0].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            medio = true;
+            ganador = "segundo";
         }
         if (gato[0][2].equals("X") && gato[1][2].equals("X") && gato[2][2].equals("X")) {
-            System.out.println("Primer jugador gana");
-            bajo = true;
+            ganador = "primero";
         } else if (gato[0][0].equals("O") && gato[1][0].equals("O") && gato[2][0].equals("O")) {
-            System.out.println("Segundo jugador gana");
-            bajo = true;
+            ganador = "segundo";
         }
-        if (superior || medio || bajo) {
-            System.out.println("Juego terminado");
-        } else {
-            System.out.println("Empate!");
-        }
+        return ganador;
     }
 }

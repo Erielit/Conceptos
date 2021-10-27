@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package listaDobleEnlazada.clases;
 
-import interfaces.ListaDEOperaciones;
+import listaDobleEnlazada.interfaces.ListaDEOperaciones;
 
 /**
  *
@@ -22,7 +22,7 @@ public class ListaDoblementeEnlazada implements ListaDEOperaciones {
         Nodo nuevo = new Nodo(info);
         if (this.isEmpty()) {
             if (posicion == 0) {
-                this.addFirst(nuevo);
+                this.addFirst(info);
             } else {
                 int auxPosicion = 1;
                 Nodo aux = this.iteratorOrigen();

@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package listaEnlazada.clases;
+package listaDobleEnlazada.clases;
 
-/**
- *
- * @author netmo
- */
 public class Nodo {
+
     private Nodo siguiente;
+    private Nodo antes;
     private Object info;
 
     public Nodo(Object info) {
-        this.siguiente = null;
         this.info = info;
     }
 
@@ -33,5 +25,13 @@ public class Nodo {
     public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
     }
-    
+
+    public Nodo antes() {
+        return antes;
+    }
+
+    public void setAntes(Nodo antes) {
+        this.antes = antes;
+    }
+
 }

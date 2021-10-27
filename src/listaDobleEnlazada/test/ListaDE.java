@@ -1,8 +1,8 @@
-package test;
+package listaDobleEnlazada.test;
 
-import clases.Elefante;
-import clases.ListaDoblementeEnlazada;
-import clases.Nodo;
+import listaDobleEnlazada.clases.Elefante;
+import listaDobleEnlazada.clases.ListaDoblementeEnlazada;
+import listaDobleEnlazada.clases.Nodo;
 import java.util.ArrayList;
 import java.util.Scanner;
 

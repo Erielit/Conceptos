@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package listaEnlazada.intefaces;
 
-import clases.Nodo;
+import listaEnlazada.clases.Nodo;
 
 /**
  *
- * @author CC7
+ * @author netmo
  */
-public interface ListaDEOperaciones {
-
+public interface ListMethods {
     public void add(int posicion, Object info);
 
     public void addFirst(Object info);
@@ -29,9 +28,7 @@ public interface ListaDEOperaciones {
 
     public boolean isEmpty();
 
-    public Nodo iteratorOrigen();
-
-    public Nodo iteratorFinal();
+    public Nodo iterator();
 
     public Nodo search(String buscar);
 
