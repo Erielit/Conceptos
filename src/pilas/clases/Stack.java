@@ -2,7 +2,8 @@ package pilas.clases;
 
 import pilas.interfaces.StackMethods;
 
-public class Stack implements StackMethods{
+public class Stack implements StackMethods {
+
     Nodo top;
     int size;
 
@@ -23,9 +24,8 @@ public class Stack implements StackMethods{
         if (this.isEmpty()) {
             // Inicializa la pila con el nuevo valor.
             top = nuevo;
-        }
-        // Caso contrario agrega el nuevo nodo al inicio de la pila.
-        else{
+        } // Caso contrario agrega el nuevo nodo al inicio de la pila.
+        else {
             nuevo.setSiguiente(top);
             top = nuevo;
         }
@@ -44,12 +44,39 @@ public class Stack implements StackMethods{
     }
 
     @Override
-    public Object peek() {
+    public Nodo peek() {
+        return this.top;
+    }
+
+    @Override
+    public Nodo iterator() {
         return this.top;
     }
 
     @Override
     public Nodo search(String param) {
-        
-    } 
+        Nodo found = null;
+        if (this.isEmpty()) {
+            new Exception("Erorr");
+        } else {
+            Nodo aux = this.iterator();
+            do {
+                if (aux.getInformation().toString().equals(param)) {
+                    found = aux;
+                    break;
+                }
+                aux = aux.siguiente();
+            } while (aux != null);
+        }
+        return found;
+    }
+
+    @Override
+    public void print() {
+        Nodo aux = this.iterator();
+        do {
+            System.out.println("[" + aux.getInformation() + "," + aux + "]");
+            aux = aux.siguiente();
+        } while (aux != null);
+    }
 }

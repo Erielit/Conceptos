@@ -8,6 +8,8 @@ public interface StackMethods {
     public int size();
     public void push(Object info);
     public void pop();
-    public Object peek();
+    public Nodo peek();
     public Nodo search(String param);
+    public Nodo iterator();
+    public void print();
 }
