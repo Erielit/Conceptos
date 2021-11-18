@@ -4,9 +4,9 @@ import colas.clases.Nodo;
 
 public interface QueueMethods {
 
-    public void put(Object info);
+    public void add(Object info);
 
-    public Object offer();
+    public Object poll();
 
     public boolean isEmpty();
 
@@ -15,6 +15,8 @@ public interface QueueMethods {
     public Object search(String param);
 
     public Nodo iterator();
+    
+    public Object peek();
 
     public void print();
 }

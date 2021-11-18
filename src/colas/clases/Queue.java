@@ -8,19 +8,18 @@ public class Queue implements QueueMethods {
     Nodo last;
 
     @Override
-    public void put(Object info) {
+    public void add(Object info) {
         Nodo nuevo = new Nodo(info);
         if (this.isEmpty()) {
-            this.last = nuevo;
             this.first = nuevo;
         } else {
             this.last.setSiguiente(nuevo);
-            this.last = nuevo;
         }
+        this.last = nuevo;
     }
 
     @Override
-    public Object offer() {
+    public Object poll() {
         if (this.isEmpty()) {
             System.out.println("Cola vacía");
         } else {
@@ -29,6 +28,11 @@ public class Queue implements QueueMethods {
             return obj;
         }
         return null;
+    }
+
+    @Override
+    public Object peek() {
+        return this.isEmpty() ? null : this.first.getInfo();
     }
 
     @Override
