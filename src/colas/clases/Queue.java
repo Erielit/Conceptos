@@ -20,12 +20,11 @@ public class Queue implements QueueMethods {
 
     @Override
     public Object poll() {
-        if (this.isEmpty()) {
-            System.out.println("Cola vacía");
-        } else {
-            Object obj = this.first.getInfo();
+        if (!this.isEmpty()) {
+            Nodo eliminar = this.first;
             this.first = this.first.siguiente();
-            return obj;
+            eliminar.setSiguiente(null);
+            return eliminar.getInfo();
         }
         return null;
     }
