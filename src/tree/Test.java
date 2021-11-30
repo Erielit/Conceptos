@@ -24,7 +24,7 @@ public class Test {
 //        t.preOrder(t.iterator());
         System.out.println("\n===========================");
 //        System.out.println(t.remove(9));
-        System.out.println(t.remove(9));
+        t.delete(9); // funciona con recursividad
         System.out.println("\n===========================");
         t.inOrder(t.iterator());
         System.out.println("\n===========================");

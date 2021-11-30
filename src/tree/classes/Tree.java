@@ -13,23 +13,24 @@ public class Tree implements TreeMethods {
         if (root == null) {
             root = nuevo;
         } else {
-            Nodo aux = root;
-            while (aux != null) {
-                nuevo.setParent(aux);
-                if (nuevo.getKey() >= aux.getKey()) {
-                    aux = aux.getRight();
-                } else {
-                    aux = aux.getLeft();
-                }
-            }
-            if (nuevo.getKey() < nuevo.getParent().getKey()) {
-                nuevo.getParent().setLeft(nuevo);
-            } else {
-                nuevo.getParent().setRight(nuevo);
-            }
+            this.root.add(i, info);
+//            Nodo aux = root;
+//            while (aux != null) {
+//                nuevo.setParent(aux);
+//                if (nuevo.getKey() >= aux.getKey()) {
+//                    aux = aux.getRight();
+//                } else {
+//                    aux = aux.getLeft();
+//                }
+//            }
+//            if (nuevo.getKey() < nuevo.getParent().getKey()) {
+//                nuevo.getParent().setLeft(nuevo);
+//            } else {
+//                nuevo.getParent().setRight(nuevo);
+//            }
         }
     }
-    
+
     public void add(int value) {
         root = addRecursive(root, value);
     }
@@ -216,20 +217,20 @@ public class Tree implements TreeMethods {
     }
 
     @Override
-    public void postOrder(Nodo n) {//
-        if (n != null) {
-            postOrder(n.getLeft());
-            postOrder(n.getRight());
-            System.out.print("[" + n.getKey() + ", " + n.getInfo().toString() + "]->");
-        }
-    }
-
-    @Override
     public void preOrder(Nodo n) {
         if (n != null) {
             System.out.print("[" + n.getKey() + ", " + n.getInfo().toString() + "]->");
             postOrder(n.getLeft());
             postOrder(n.getRight());
+        }
+    }
+
+    @Override
+    public void postOrder(Nodo n) {//
+        if (n != null) {
+            postOrder(n.getLeft());
+            postOrder(n.getRight());
+            System.out.print("[" + n.getKey() + ", " + n.getInfo().toString() + "]->");
         }
     }
 

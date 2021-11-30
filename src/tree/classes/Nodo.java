@@ -79,4 +79,21 @@ public class Nodo {
         }
     }
 
+    public void add(int key, Object info) {
+        if (key < this.key) {
+            //insertar lado izquierdo
+            if (this.left == null) {
+                this.left = new Nodo(key, info);
+            } else {
+                this.left.add(key, info);
+            }
+        } else {
+            if (this.right == null) {
+                this.right = new Nodo(key, info);
+            } else {
+                this.right.add(key, info);
+            }
+        }
+    }
+
 }
